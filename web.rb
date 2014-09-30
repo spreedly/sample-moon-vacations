@@ -18,8 +18,7 @@ helpers do
 end
 
 before do
-  @cart = session[:cart]
-  @gateway = session[:gateway]
+  @rooms = session[:rooms]
 end
 
 get '/' do
@@ -31,8 +30,9 @@ get '/book' do
 end
 
 post '/book' do
+  session[:rooms] = params['rooms'].to_i
   content_type :json
-  {foo: 'bar'}.to_json
+  {success: true}.to_json
 end
 
 get '/about' do
