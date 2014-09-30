@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Book a Moon Vacation</h1>
+    <h2>
+      <small>Reserve your room now!</small>
+    </h2>
+  </div>
+</div>
+
+<div class="container">
+  <form class="form-horizontal" action="/book" method="POST">
+    <div class="row-fluid">
+      <div class="span8">
+        <div class="row-fluid">
+          <div class="span3">
+            <label for="credit_card_first_name">First Name</label>
+            <input class="span12" id="credit_card_first_name" name="credit_card[first_name]" size="30" type="text" value="Joe"/>
+          </div>
+          <div class="span3">
+            <label for="credit_card_last_name">Last Name</label>
+            <input class="span12" id="credit_card_last_name" name="credit_card[last_name]" size="30" type="text" value="Smith"/>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span3">
+            <label for="credit_card_number">Card Number</label>
+            <input autocomplete="off" class="span12 cc-number" id="credit_card_number" name="credit_card[number]" size="30" type="text" value="4111111111111111"/>
+          </div>
+
+          <div class="span2">
+            <label for="credit_card_verification_value">CVV</label>
+            <input autocomplete="off" class="span12 cc-cvc" id="credit_card_verification_value" name="credit_card[verification_value]" size="30" type="text" value="123"/>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span3">
+            <label for="credit_card_exp">Expiration</label>
+            <input class="span12 cc-exp" id="credit_card_exp" name="credit_card[exp]" placeholder="Month / Year" size="30" type="text" value="01 / 2015"/>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span2">
+            <label for="rooms"># of Rooms</label>
+            <input class="span12" id="rooms" name="data[how_many]" type="text" value="2"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <h2 class="validation"></h2>
+    <button type="submit" class="btn btn-primary">Purchase</button>
+  </form>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="<%= ENV['SPREEDLY_JS_URL'] %>"></script>
+  <script type="text/javascript" src="<%= ENV['JQUERY_PAYMENT_JS_URL'] %>"></script>
+  <script type="text/javascript" src="<%= ENV['VALIDATOR_JS_URL'] %>"></script>
+  <script type="text/javascript">
+    Spreedly.host = "<%= ENV['SPREEDLY_JSONP_API_URL'] %>"
+    Spreedly.environment_key = "<%= ENV['SPREEDLY_ENVIRONMENT_KEY'] %>"
+  </script>
+</div>
