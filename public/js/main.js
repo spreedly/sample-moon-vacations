@@ -1,7 +1,12 @@
+// This example makes use of jQuery to help smooth out browser differences. Also it
+// uses JSONP for the cross-origin request for greater browser compatability.
 jQuery(function($) {
   Validator.registerFields();
   $('form').submit(function(e) {
     e.preventDefault();
+
+    $form = $(this);
+    Spreedly.create_payment_method_url =  $form.attr('action');
 
     Validator.perform();
     if ($('input.invalid').length) {
@@ -17,8 +22,6 @@ jQuery(function($) {
   });
 });
 
-// This example makes use of jQuery to help smooth out browser differences. Also it
-// uses JSONP for the cross-origin request for greater browser compatability.
 Spreedly = {
   add_payment_method: function(card, success, error) {
     // JSONP sends non-nested data, so this specifies the type.
@@ -26,7 +29,7 @@ Spreedly = {
     card["environment_key"] = Spreedly.environment_key;
 
     var paramStr = $.param(card);
-    var url = Spreedly.host + "?" + paramStr
+    var url = Spreedly.create_payment_method_url + ".js?" + paramStr
 
     $.ajax({
       type: "GET",
@@ -54,7 +57,7 @@ Booking = {
     if (data.status === 201) {
       $.ajax({
         type: 'POST',
-        url: '/book',
+        url: '/process',
         data: {
           payment_method_token: data.transaction.payment_method.token,
           rooms: $('#rooms').val()

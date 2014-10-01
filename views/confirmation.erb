@@ -1,5 +1,8 @@
 <div class="container">
   <h1>Thank You</h1>
 
-  <p>Your <%= @rooms %> <%= @rooms == 1 ? 'room has' : 'rooms have' %> been booked.</p>
+  <p>Your <%= @cart[:rooms] %> <%= @cart[:rooms] == 1 ? 'room has' : 'rooms have' %> been booked.</p>
+
+  <br>
+  <p><em>Learn more <a href="/about">about</a> how this purchase is instrumented with JavaScript.</em></p>
 </div>
