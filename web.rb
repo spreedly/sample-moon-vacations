@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'spreedly'
 require 'rack/session/pool'
 require 'json'
 require_relative 'env'
@@ -37,11 +38,13 @@ get_or_post '/process' do
   if request.env['REQUEST_METHOD'] == 'GET'
     redirect to(:confirmation) and return
   end
-  # Process transaction here ...
-  #   with the Spreedly Gem https://github.com/spreedly/sample-rainbow-tails/blob/master/app/controllers/tails_controller.rb#L13-L17
-  #   or a RESTful libraray https://github.com/spreedly/sample-phasers/blob/master/app/models/spreedly_core.rb#L15-L17
+  transaction = spreedly.purchase_on_gateway(
+    gateway_token,
+    params[:payment_method_token],
+    amount_to_charge
+  )
   content_type :json
-  {success: true}.to_json
+  {success: transaction.succeeded?}.to_json
 end
 
 get '/confirmation' do
@@ -52,3 +55,14 @@ get '/about' do
   view :about
 end
 
+def spreedly
+  @spreedly ||= Spreedly::Environment.new(ENV['SPREEDLY_ENVIRONMENT_KEY'], ENV['SPREEDLY_ACCESS_SECRET'], base_url: ENV['SPREEDLY_HOST'])
+end
+
+def amount_to_charge
+  150000 * @cart[:rooms]
+end
+
+def gateway_token
+  ENV['SPREEDLY_GATEWAY_FOR_CREDIT_CARD']
+end

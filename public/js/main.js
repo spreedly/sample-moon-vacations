@@ -80,6 +80,10 @@ Booking = {
     });
   },
   handleBookingResponse: function(data) {
-    window.location.href = "/confirmation";
+    if (data["success"]) {
+      window.location.href = "/confirmation";
+    } else {
+      alert("Unable to add charge to card");
+    }
   }
 }
