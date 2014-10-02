@@ -47,7 +47,7 @@ Booking = {
       "first_name": $('#credit_card_first_name').val(),
       "last_name": $('#credit_card_last_name').val(),
       "number": $('#credit_card_number').val(),
-      "verification_value": $('#credit_card_verification_value').val(),
+      "verification_value": $('#credit_card_verification_value').val().replace(/\s/g, ''),
       "month": $('#credit_card_exp').val().split("/")[0].trim(),
       "year": $('#credit_card_exp').val().split("/")[1].trim()
     }
