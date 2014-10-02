@@ -15,18 +15,18 @@
     <div class="row-fluid">
       <div class="span8">
         <div class="row-fluid">
-          <div class="span3">
+          <div class="span4">
             <label for="credit_card_first_name">First Name</label>
             <input class="span12" id="credit_card_first_name" name="credit_card[first_name]" size="30" type="text" value="Joe"/>
           </div>
-          <div class="span3">
+          <div class="span4">
             <label for="credit_card_last_name">Last Name</label>
             <input class="span12" id="credit_card_last_name" name="credit_card[last_name]" size="30" type="text" value="Smith"/>
           </div>
         </div>
 
         <div class="row-fluid">
-          <div class="span3">
+          <div class="span4">
             <label for="credit_card_number">Card Number</label>
             <input autocomplete="off" class="span12 cc-number" id="credit_card_number" name="credit_card[number]" size="30" type="text" value="4111 1111 1111 1111"/>
           </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="row-fluid">
-          <div class="span3">
+          <div class="span4">
             <label for="credit_card_exp">Expiration</label>
             <input class="span12 cc-exp" id="credit_card_exp" name="credit_card[exp]" placeholder="Month / Year" size="30" type="text" value="01 / <%= Time.now.year + 1 %>"/>
           </div>
@@ -49,6 +49,30 @@
     <h2 class="validation"></h2>
     <button type="submit" class="btn btn-primary">Purchase</button>
   </form>
+
+  <div>
+    <p>
+      * This is hooked up to a Spreedly Test gateway and does not use real money.
+      <br/>
+      &nbsp; This gateway accepts a <a href="https://docs.spreedly.com/reference/test-data/">number of test cards</a>.  Here are a few examples:
+    </p>
+    <table class="table span6">
+      <tr>
+        <th>Card Type</th>
+        <th>Good Card</th>
+        <th>Declined/Failed Card</th>
+      </tr>
+      <td>Visa</td>
+      <td>4111111111111111</td>
+      <td>4012888888881881</td>
+      <tr>
+        <td>MasterCard</td>
+        <td>5555555555554444</td>
+        <td>5105105105105100</td>
+      </tr>
+    </table>
+  </div>
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="<%= ENV['JQUERY_PAYMENT_JS_URL'] %>"></script>
   <script type="text/javascript" src="<%= ENV['VALIDATOR_JS_URL'] %>"></script>
